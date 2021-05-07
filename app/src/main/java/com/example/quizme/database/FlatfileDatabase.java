@@ -39,7 +39,7 @@ public class FlatfileDatabase {
         for (QuizSet set : sets) {
             //BTW: Das was in de Doku stoht über SQLite isch in jedem Projekt mit Sicherheitsrequirements
             //brandgeförlich. Machet euri Applikatione SQL Injection sicher im Name vo Terry A. Davis und Dennis Ritchie
-            //süchscht gits Handlige gäge die Genfer Konvention :)
+            //süchscht gits Handlige gäge die Genfer Konvention :))
             Cursor cursor2 = dbHandler.getReadableDatabase().
                     rawQuery(String.format("SELECT * FROM quizQuestion WHERE setUUID = '%s';",
                             set.getUUID()), null);
