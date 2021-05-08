@@ -10,6 +10,10 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final int DB_VERSION = 1;
     private static final String DB_NAME = "quiz.db";
 
+    /**
+     * Erstellt einen Datenbankhandler, welcher von der Androidsuperklasse erbt. Diese Klasse erstellt die Tabellten für die Quizapp
+     * @param context ApplicationProvider.getApplicationContext();
+     */
     public DBHandler(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
