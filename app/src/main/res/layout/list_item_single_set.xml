@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:background="@color/grey"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tvTitleSet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:text="Title of the set"/>
+
+    <TextView
+        android:id="@+id/tvSetNumberOfQuestions"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="@color/lightgrey"
+        android:text="15 Questions" />
+
+    <TextView
+        android:id="@+id/tvSetHighScore"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="@color/lightgrey"
+        android:text="Highscore: 30%"/>
+
+    <TextView
+        android:id="@+id/tvSetCategory"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="@color/lightgrey"
+        android:text="Category: Programming"/>
+
+</LinearLayout>
