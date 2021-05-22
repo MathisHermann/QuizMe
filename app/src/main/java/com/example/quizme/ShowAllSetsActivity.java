@@ -1,7 +1,9 @@
 package com.example.quizme;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -18,7 +20,6 @@ public class ShowAllSetsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_all_sets);
 
-
         headerQuizMeSets = findViewById(R.id.tvHeaderQuizMeSets);
         btExit = findViewById(R.id.btExit);
 
@@ -27,6 +28,19 @@ public class ShowAllSetsActivity extends AppCompatActivity {
 
         headerQuizMeSets.setText(playerName);
 
+        //button to go to activity_create_set
+        Button button = (Button) findViewById(R.id.buttonGoToCreateEditActivity);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openCreateOrEditSetActivity();
+            }
+        });
+    }
+
+    public void openCreateOrEditSetActivity() {
+        Intent intent2 = new Intent(this, CreateOrEditSetActivity.class);
+        startActivity(intent2);
     }
 
     public void finishActivity(View view) {
