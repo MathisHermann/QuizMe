@@ -25,7 +25,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:hint="@string/create_new_name_of_the_set" />
+            android:hint="@string/create_new_name_of_the_set"
+            android:maxLength="30"/>
 
         <TextView
             android:id="@+id/numberCharsOfSetName"
@@ -59,6 +60,14 @@
             android:layout_height="wrap_content" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonGoToCreateEditActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:text="Add Question"
+        android:layout_gravity="center"/>
 
     <ListView
         android:id="@+id/listOfCreateQuestions"

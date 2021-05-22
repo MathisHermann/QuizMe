@@ -3,6 +3,7 @@ package com.example.quizme;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -34,7 +35,6 @@ public class ShowAllSetsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_all_sets);
-
 
         headerQuizMeSets = findViewById(R.id.tvHeaderQuizMeSets);
         lvDisplayAllSets = findViewById(R.id.lvDisplayAllSets);
@@ -72,6 +72,7 @@ public class ShowAllSetsActivity extends AppCompatActivity {
 
         headerQuizMeSets.setText(playerName);
 
+
         lvDisplayAllSets.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -81,6 +82,19 @@ public class ShowAllSetsActivity extends AppCompatActivity {
 
         });
 
+        //button to go to activity_create_set
+        Button button = (Button) findViewById(R.id.buttonGoToCreateEditActivity);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openCreateOrEditSetActivity();
+            }
+        });
+    }
+
+    public void openCreateOrEditSetActivity() {
+        Intent intent2 = new Intent(this, CreateOrEditSetActivity.class);
+        startActivity(intent2);
     }
 
     private void openActivityPlayQuiz(int position) {

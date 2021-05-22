@@ -5,12 +5,31 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="6dp"
+        android:gravity="center">
+
+
     <TextView
         android:id="@+id/tvHeaderQuizMeSets"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Your Quiz Sets" />
 
+        <Button
+            android:id="@+id/buttonGoToCreateEditActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:text="Create new Set"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </LinearLayout>
     <ListView
         android:id="@+id/lvDisplayAllSets"
         android:layout_width="match_parent"
