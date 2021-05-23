@@ -11,7 +11,6 @@ import java.util.Set;
 
 public class FlatfileDatabase {
     private final DBHandler dbHandler;
-
     /**
      * Erstellt eine Helferklasse zur Verwaltung von Quizentitäten
      * @param dbHandler Datenbankhandler

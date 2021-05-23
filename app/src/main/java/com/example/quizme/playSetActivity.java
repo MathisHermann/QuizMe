@@ -62,7 +62,7 @@ public class playSetActivity extends AppCompatActivity {
     private ListView lvDisplayAllSets;
     private ListView lvPlayAnswers;
     private final List<String> allOptions = new ArrayList<String>();
-    FlatfileDatabase fdb = new FlatfileDatabase(new DBHandler(null));
+    FlatfileDatabase fdb = new FlatfileDatabase(new DBHandler(this));
     String setID, rightAnser;
     private int setPotion = 0;
     private int round = 0;

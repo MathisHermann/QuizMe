@@ -30,7 +30,7 @@ public class ShowAllSetsActivity extends AppCompatActivity {
     private ListView lvDisplayAllSets;
     private List<String> allSets = new ArrayList<String>();
     private String playerName;
-    FlatfileDatabase fdb = new FlatfileDatabase(new DBHandler(null));
+    FlatfileDatabase fdb = new FlatfileDatabase(new DBHandler(this));
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
