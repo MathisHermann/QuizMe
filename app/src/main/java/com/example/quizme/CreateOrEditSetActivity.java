@@ -19,7 +19,7 @@ public class CreateOrEditSetActivity extends AppCompatActivity {
         //count chars entered for name of set
         TextView textView;
         EditText editText;
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_create_or_edit_set);
         textView = findViewById(R.id.numberCharsOfSetName);
         editText = findViewById(R.id.nameCreateNew);
         editText.addTextChangedListener(new TextWatcher() {

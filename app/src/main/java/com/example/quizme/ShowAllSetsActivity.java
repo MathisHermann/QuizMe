@@ -36,6 +36,10 @@ public class ShowAllSetsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_all_sets);
 
+        Intent intent = getIntent();
+        String playerName = intent.getStringExtra("PLAYER_NAME");
+
+
         headerQuizMeSets = findViewById(R.id.tvHeaderQuizMeSets);
         lvDisplayAllSets = findViewById(R.id.lvDisplayAllSets);
         btExit = findViewById(R.id.btExit);
