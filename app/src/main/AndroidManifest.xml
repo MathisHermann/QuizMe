@@ -9,9 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.QuizMe">
+        <activity android:name=".NewQuestion"></activity>
         <activity android:name=".ShowAllSetsActivity" />
-        <activity android:name=".CreateOrEditSetActivity" />
-        <!--<activity android:name=".PlaySetActivity" />-->
+        <activity android:name=".CreateOrEditSetActivity" /> <!-- <activity android:name=".PlaySetActivity" /> -->
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
