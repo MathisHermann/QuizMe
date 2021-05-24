@@ -139,7 +139,12 @@ public class playSetActivity extends AppCompatActivity {
     }
 
     private void openScoreAcrivity(int score) {
-        //todo
+
+        /*todo
+        Intent intent = new Intent(this, openScoreAcrivity.class);
+        intent.putExtra("score", score);
+        startActivity(intent);*/
+
     }
 
     ;
