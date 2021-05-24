@@ -4,8 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.Nullable;
-
 public class DBHandler extends SQLiteOpenHelper {
     private static final int DB_VERSION = 1;
     private static final String DB_NAME = "quiz.db";
@@ -14,7 +12,7 @@ public class DBHandler extends SQLiteOpenHelper {
      * Erstellt einen Datenbankhandler, welcher von der Androidsuperklasse erbt. Diese Klasse erstellt die Tabellten für die Quizapp
      * @param context ApplicationProvider.getApplicationContext();
      */
-    public DBHandler(@Nullable Context context) {
+    public DBHandler(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
