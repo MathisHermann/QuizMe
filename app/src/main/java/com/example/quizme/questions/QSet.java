@@ -2,9 +2,9 @@ package com.example.quizme.questions;
 
 import java.util.ArrayList;
 
-public class QuizSet {
+public class QSet {
     private String name;
-    private ArrayList<QuizQuestion> questions;
+    private ArrayList<QQuestion> questions;
     private byte numQuestions;
 
 
@@ -13,13 +13,13 @@ public class QuizSet {
     private static String[] newQuestion = new String[5]; // used to store the input data for a new question
 
 
-    public QuizSet(String name, byte numQuestions) {
+    public QSet(String name, byte numQuestions) {
         this.name = name;
         this.numQuestions = numQuestions;
-        this.questions = new ArrayList<QuizQuestion>();
+        this.questions = new ArrayList<QQuestion>();
     }
 
-    public QuizSet(String name, byte numQuestions, ArrayList<QuizQuestion> questions) {
+    public QSet(String name, byte numQuestions, ArrayList<QQuestion> questions) {
         this.name = name;
         this.numQuestions = numQuestions;
         this.questions = questions;
@@ -42,11 +42,11 @@ public class QuizSet {
         this.numQuestions = numQuestions;
     }
 
-    public ArrayList<QuizQuestion> getQuestions() {
+    public ArrayList<QQuestion> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(ArrayList<QuizQuestion> questions) {
+    public void setQuestions(ArrayList<QQuestion> questions) {
         this.questions = questions;
     }
 }

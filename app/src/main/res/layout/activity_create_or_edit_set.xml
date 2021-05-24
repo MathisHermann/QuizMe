@@ -62,7 +62,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/buttonGoToCreateEditActivity"
+        android:id="@+id/buttonAddNewQuestion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="6dp"

@@ -3,7 +3,6 @@ package com.example.quizme;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -29,7 +28,7 @@ public class ShowAllSetsActivity extends AppCompatActivity {
         headerQuizMeSets.setText(playerName);
 
         //button to go to activity_create_set
-        Button button = (Button) findViewById(R.id.buttonGoToCreateEditActivity);
+        Button button = (Button) findViewById(R.id.buttonAddNewQuestion);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

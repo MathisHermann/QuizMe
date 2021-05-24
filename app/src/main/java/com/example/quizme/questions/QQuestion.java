@@ -1,10 +1,10 @@
 package com.example.quizme.questions;
 
-public class QuizQuestion {
+public class QQuestion {
     private String question;
     private String[] answers;
 
-    public QuizQuestion(String[] answers, String question) {
+    public QQuestion(String[] answers, String question) {
         this.question = question;
         this.answers = answers;
     }
