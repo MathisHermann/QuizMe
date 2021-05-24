@@ -51,7 +51,7 @@ public class NewQuestion extends AppCompatActivity {
             tv_em.setTextColor(Color.parseColor("#FFFFFF"));
         }else{
             intent.putExtra("theQuestion",quest);
-            intent.putExtra("theQuestion",answers);
+            intent.putExtra("theAnswers",answers);
             startActivity(intent);
         }
 

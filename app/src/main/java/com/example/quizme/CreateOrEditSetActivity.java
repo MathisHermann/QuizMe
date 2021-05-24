@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.quizme.questions.QQuestion;
+
 public class CreateOrEditSetActivity extends AppCompatActivity {
     Button newQuestion;
 
@@ -22,6 +24,14 @@ public class CreateOrEditSetActivity extends AppCompatActivity {
         TextView textView = findViewById(R.id.numberCharsOfSetName);
         EditText editText = findViewById(R.id.nameCreateNew);
         TextView tv = findViewById(R.id.createNew);
+
+        //todo dummy database exists or not if not create
+
+        //todo add question to dummy database
+        String quest=getIntent().getStringExtra("theQuestion");
+        String[] answers= (String[]) getIntent().getSerializableExtra("theAnswers");
+        QQuestion qQest=new QQuestion(answers,quest);
+
 
         editText.addTextChangedListener(new TextWatcher() {
             @Override
