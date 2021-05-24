@@ -3,7 +3,7 @@ package com.example.quizme;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,11 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.util.Collections;
 
 import com.example.quizme.database.FlatfileDatabase;
 import com.example.quizme.database.DBHandler;
-import com.example.quizme.entity.QuizSet;
+
 
 
 public class ShowAllSetsActivity extends AppCompatActivity {
@@ -49,19 +48,7 @@ public class ShowAllSetsActivity extends AppCompatActivity {
         fdb.getAllSets().forEach(quizSet -> {
             allSets.add(quizSet.getName());
 
-            System.out.println(quizSet.getCategory());
 
-            System.out.println(quizSet.getUUID());
-
-            quizSet.questions.forEach(quizQuestion -> {
-
-                System.out.println(quizQuestion.getQuestion());
-                System.out.println(quizQuestion.getCorrectAnswer());
-
-                System.out.println(quizQuestion.wrongAnswers);
-                System.out.println(quizQuestion.uuid);
-
-            });
         });
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
