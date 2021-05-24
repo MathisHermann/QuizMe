@@ -2,7 +2,6 @@ package com.example.quizme;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Initializing list view with the custom adapter
         //ArrayList<Player> playerList = new ArrayList<>();
-        buttonStart = findViewById(R.id.buttonGoToCreateEditActivity);
+        buttonStart = findViewById(R.id.buttonAddNewQuestion);
 
         // Set up list item onclick listener
         setUpListItemClickListener();

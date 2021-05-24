@@ -74,7 +74,7 @@ public class ShowAllSetsActivity extends AppCompatActivity {
         });
 
         //button to go to activity_create_set
-        Button button = (Button) findViewById(R.id.buttonGoToCreateEditActivity);
+        Button button = (Button) findViewById(R.id.buttonAddNewQuestion);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
