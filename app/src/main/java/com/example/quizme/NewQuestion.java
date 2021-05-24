@@ -11,8 +11,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.quizme.questions.QQuestion;
-
 public class NewQuestion extends AppCompatActivity {
     TextView tv_em;
 
