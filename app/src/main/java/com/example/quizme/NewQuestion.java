@@ -51,6 +51,7 @@ public class NewQuestion extends AppCompatActivity {
             intent.putExtra("theQuestion",quest);
             intent.putExtra("theAnswers",answers);
             startActivity(intent);
+            finish();
         }
 
     }

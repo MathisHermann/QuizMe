@@ -12,4 +12,22 @@
     <string name="create_question_category">Category:</string>
     <string name="create_new_name_of_the_set">Name of the Set</string>
     <string name="tV_frage">Enter the question: </string>
+
+    <string-array name="categories">
+        <item>SPORTS</item>
+        <item>GEOGRAPHY</item>
+        <item>MUSIC</item>
+        <item>FILMS</item>
+        <item>TV</item>
+        <item>HISTORY</item>
+        <item>LITERATURE</item>
+        <item>LANGUAGE</item>
+        <item>SCIENCE</item>
+        <item>GAMING</item>
+        <item>ENTERTAINMENT</item>
+        <item>RELIGION</item>
+        <item>FUN</item>
+        <item>PEOPLE</item>
+        <item>ECONOMICS</item>
+    </string-array>
 </resources>
