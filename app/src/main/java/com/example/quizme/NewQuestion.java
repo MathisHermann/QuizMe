@@ -51,8 +51,8 @@ public class NewQuestion extends AppCompatActivity {
         }else{
             intent.putExtra("theQuestion",quest);
             intent.putExtra("theAnswers",answers);
-            startActivityForResult(intent,1);
-            //setResult(RESULT_OK, intent);
+
+            startActivity(intent);
             Log.e("Leander",quest);
             finish();
         }

@@ -36,7 +36,14 @@ public class QuestionAdapter extends ArrayAdapter<QuizQuestion> {
         // Populate the data into the template view using the data object
         etQuestion.setText(quesTion.getQuestion());
         etRightAnswer.setText(quesTion.getCorrectAnswer());
-//todo wrong answers
+
+        // Converting HashSet to Array
+        String[] arrayWrongAnswers = quesTion.wrongAnswers.toArray(new String[quesTion.wrongAnswers.size()]);
+
+        etWrongAnswer1.setText(arrayWrongAnswers[0]);
+        etWrongAnswer2.setText(arrayWrongAnswers[1]);
+        etWrongAnswer3.setText(arrayWrongAnswers[2]);
+
 
         // Return the completed view to render on screen
         return convertView;
