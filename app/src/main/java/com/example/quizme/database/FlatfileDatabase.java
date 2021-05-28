@@ -76,16 +76,16 @@ public class FlatfileDatabase {
         for (QuizSet set : sets) {
             dbHandler.getWritableDatabase().execSQL(String
                     .format("INSERT INTO quizSet (setUUID, name, category) " +
-                            "VALUES (%s, %s, %s)", set.getUUID(), set.getName(), set.getCategory()));
+                            "VALUES ('%s', '%s', '%s')", set.getUUID(), set.getName(), set.getCategory()));
             for (QuizQuestion question : set.questions) {
                 for (String wrongAnswer : question.wrongAnswers) {
                     dbHandler.getWritableDatabase().execSQL(String
                             .format("INSERT INTO wrongAnswers (answer, questionUUID) " +
-                                    "VALUES (%s, %s)", wrongAnswer, question.uuid));
+                                    "VALUES ('%s', '%s')", wrongAnswer, question.uuid));
                 }
                 dbHandler.getWritableDatabase().execSQL(
                         String.format("INSERT INTO quizQuestion (questionUUID, questionText, " +
-                        "correctAnswer, setUUID) VALUES (%s, %s, %s, %s)", question.uuid,
+                        "correctAnswer, setUUID) VALUES ('%s', '%s', '%s', '%s')", question.uuid,
                                 question.getQuestion(), question.getCorrectAnswer(), set.getUUID()));
             }
         }
