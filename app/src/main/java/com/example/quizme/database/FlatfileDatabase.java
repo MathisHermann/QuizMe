@@ -80,7 +80,7 @@ public class FlatfileDatabase {
             for (QuizQuestion question : set.questions) {
                 for (String wrongAnswer : question.wrongAnswers) {
                     dbHandler.getWritableDatabase().execSQL(String
-                            .format("INSERT INTO wrongAnswers (answer, questionUUID) " +
+                            .format("INSERT INTO quizWrongAnswers (answer, questionUUID) " +
                                     "VALUES ('%s', '%s')", wrongAnswer, question.uuid));
                 }
                 dbHandler.getWritableDatabase().execSQL(

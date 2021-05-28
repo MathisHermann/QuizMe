@@ -37,11 +37,9 @@ public class QuestionAdapter extends ArrayAdapter<QuizQuestion> {
         etQuestion.setText(quesTion.getQuestion());
         etRightAnswer.setText(quesTion.getCorrectAnswer());
 
-        ArrayList<String> arrWrongAnswer = new ArrayList<>(quesTion.wrongAnswers);
-
-        etWrongAnswer1.setText(arrWrongAnswer.get(0));
-        etWrongAnswer2.setText(arrWrongAnswer.get(1));
-        etWrongAnswer3.setText(arrWrongAnswer.get(2));
+        etWrongAnswer1.setText(quesTion.wrongAnswers.get(0));
+        etWrongAnswer2.setText(quesTion.wrongAnswers.get(1));
+        etWrongAnswer3.setText(quesTion.wrongAnswers.get(2));
 
 
         // Return the completed view to render on screen

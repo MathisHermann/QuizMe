@@ -32,13 +32,13 @@ public class CreateOrEditSetActivity extends AppCompatActivity {
     private ArrayList<QuizQuestion> arrayOfQuestions = DataHolder.getInstance().arrayOfQuestions;
     private EditText editText;
     private Spinner spinner;
-    private FlatfileDatabase fdb = new FlatfileDatabase(new DBHandler(this));
+    private FlatfileDatabase fdb;
     ListView listView;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_or_edit_set);
-
+        fdb = new FlatfileDatabase(new DBHandler(getApplicationContext()));
         //check if intent extras exists
         try {
             String s = getIntent().getStringExtra("theQuestion");
@@ -140,10 +140,11 @@ public class CreateOrEditSetActivity extends AppCompatActivity {
             EditText etWrongAnswer3 = (EditText) view.findViewById(R.id.editWrongAnswerThree);
 
             //create object QuizQuestion
-            QuizQuestion frage = new QuizQuestion(UUID.randomUUID().toString(), etQuestion.toString(), etRightAnswer.toString());
-            frage.wrongAnswers.add(etWrongAnswer1.toString());
-            frage.wrongAnswers.add(etWrongAnswer2.toString());
-            frage.wrongAnswers.add(etWrongAnswer3.toString());
+            QuizQuestion frage = new QuizQuestion(UUID.randomUUID().toString(),
+                    etQuestion.getText().toString(), etRightAnswer.getText().toString());
+            frage.wrongAnswers.add(etWrongAnswer1.getText().toString());
+            frage.wrongAnswers.add(etWrongAnswer2.getText().toString());
+            frage.wrongAnswers.add(etWrongAnswer3.getText().toString());
 
             //add question to set
             quizSet.questions.add(frage);
