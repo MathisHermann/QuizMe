@@ -46,8 +46,8 @@ public class CreateOrEditSetActivity extends AppCompatActivity {
             //get the new question
             String quest = getIntent().getStringExtra("theQuestion");
             String[] answers = (String[]) getIntent().getSerializableExtra("theAnswers");
-            Log.e("Extra", quest);
-            Log.e("Extra", Arrays.toString(answers));
+            Log.e("Noël", quest);
+            Log.e("Noël", Arrays.toString(answers));
             //create new question object
             QuizQuestion question = new QuizQuestion(UUID.randomUUID().toString(), quest, answers[0]);
             question.wrongAnswers.add(answers[1]);
