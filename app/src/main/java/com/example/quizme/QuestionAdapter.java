@@ -37,12 +37,11 @@ public class QuestionAdapter extends ArrayAdapter<QuizQuestion> {
         etQuestion.setText(quesTion.getQuestion());
         etRightAnswer.setText(quesTion.getCorrectAnswer());
 
-        // Converting HashSet to Array
-        String[] arrayWrongAnswers = quesTion.wrongAnswers.toArray(new String[quesTion.wrongAnswers.size()]);
+        ArrayList<String> arrWrongAnswer = new ArrayList<>(quesTion.wrongAnswers);
 
-        etWrongAnswer1.setText(arrayWrongAnswers[0]);
-        etWrongAnswer2.setText(arrayWrongAnswers[1]);
-        etWrongAnswer3.setText(arrayWrongAnswers[2]);
+        etWrongAnswer1.setText(arrWrongAnswer.get(0));
+        etWrongAnswer2.setText(arrWrongAnswer.get(1));
+        etWrongAnswer3.setText(arrWrongAnswer.get(2));
 
 
         // Return the completed view to render on screen

@@ -15,10 +15,13 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.quizme.database.DBHandler;
+import com.example.quizme.database.FlatfileDatabase;
 import com.example.quizme.entity.QuizQuestion;
 import com.example.quizme.entity.QuizSet;
 
 import java.util.ArrayList;
+import java.util.Set;
 import java.util.UUID;
 
 public class CreateOrEditSetActivity extends AppCompatActivity {
@@ -28,6 +31,7 @@ public class CreateOrEditSetActivity extends AppCompatActivity {
     private ArrayList<QuizQuestion> arrayOfQuestions = DataHolder.getInstance().arrayOfQuestions;
     private EditText editText;
     private Spinner spinner;
+    private FlatfileDatabase fdb = new FlatfileDatabase(new DBHandler(this));
     ListView listView;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,11 +104,9 @@ public class CreateOrEditSetActivity extends AppCompatActivity {
 
         //button to go to activity_create_set
         Button buttonNewSet = (Button) findViewById(R.id.buttonAddNewSet);
-        button.setOnClickListener(new View.OnClickListener() {
+        buttonNewSet.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                createNewSet();
-            }
+            public void onClick(View v) { createNewSet(); }
         });
 
         //choose category from the list
@@ -113,8 +115,6 @@ public class CreateOrEditSetActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         //spinner.setOnItemClickListener(this);
-
-
 
 
     }
@@ -146,9 +146,18 @@ public class CreateOrEditSetActivity extends AppCompatActivity {
             //add question to set
             quizSet.questions.add(frage);
         }
+/*
+        //test
+        String[] arraySet = quizSet.questions.toArray(new String[quizSet.questions.size()]);
+        for (String name : arraySet) {
+            Log.e("Stoll", name);
+        }
+*/
 
         //todo save the set
-
+        Set<QuizSet> allSetsInDB = fdb.getAllSets();
+        allSetsInDB.add(quizSet);
+        fdb.overrideSetsToDB(allSetsInDB);
 
         //delete arrayList
         DataHolder.getInstance().arrayOfQuestions.clear();
