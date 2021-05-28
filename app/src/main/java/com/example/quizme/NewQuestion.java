@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,7 +28,7 @@ public class NewQuestion extends AppCompatActivity {
                 saveQuestion();
             }
         });
-        tv_em=findViewById(R.id.et_question);
+        tv_em=findViewById(R.id.tv_error_message);
     }
 
     private void saveQuestion() {
@@ -44,13 +45,15 @@ public class NewQuestion extends AppCompatActivity {
         String[] answers={rightAnswer.getText().toString(),wrongAnswer1.getText().toString(),wrongAnswer2.getText().toString(),wrongAnswer3.getText().toString()};
 
         //test if something is empty
-        if(quest==""||answers[0]==""||answers[1]==""||answers[2]==""||answers[3]==""){
-            tv_em.setText("Invalid Input");
-            tv_em.setTextColor(Color.parseColor("#FFFFFF"));
+        if(quest.isEmpty()||answers[0].isEmpty()||answers[1].isEmpty()||answers[2].isEmpty()||answers[3].isEmpty()){
+           tv_em.setText("Invalid Input");
+            tv_em.setTextColor(Color.parseColor("#ab2524"));
         }else{
             intent.putExtra("theQuestion",quest);
             intent.putExtra("theAnswers",answers);
+
             startActivity(intent);
+            Log.e("Leander",quest);
             finish();
         }
 

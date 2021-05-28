@@ -29,12 +29,12 @@ public class ShowAllSetsActivity extends AppCompatActivity {
     private ListView lvDisplayAllSets;
     private List<String> allSets = new ArrayList<String>();
     private String playerName;
-    FlatfileDatabase fdb = new FlatfileDatabase(new DBHandler(this));
+    FlatfileDatabase fdb;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_all_sets);
-
+        fdb = new FlatfileDatabase(new DBHandler(getApplicationContext()));
         Intent intent = getIntent();
         String playerName = intent.getStringExtra("PLAYER_NAME");
 
