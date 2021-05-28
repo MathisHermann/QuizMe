@@ -21,6 +21,7 @@ import com.example.quizme.entity.QuizQuestion;
 import com.example.quizme.entity.QuizSet;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Set;
 import java.util.UUID;
 
@@ -45,7 +46,8 @@ public class CreateOrEditSetActivity extends AppCompatActivity {
             //get the new question
             String quest = getIntent().getStringExtra("theQuestion");
             String[] answers = (String[]) getIntent().getSerializableExtra("theAnswers");
-
+            Log.e("Extra", quest);
+            Log.e("Extra", Arrays.toString(answers));
             //create new question object
             QuizQuestion question = new QuizQuestion(UUID.randomUUID().toString(), quest, answers[0]);
             question.wrongAnswers.add(answers[1]);
