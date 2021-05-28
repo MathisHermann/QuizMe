@@ -25,7 +25,10 @@ public class CreateOrEditSetActivity extends AppCompatActivity {
     //enum Categories {SPORTS, GEOGRAPHY,MUSIC, FILMS, TV, HISTORY, LITERATURE, LANGUAGE, SCIENCE, GAMING, ENTERTAINMENT, RELIGION, FUN, PEOPLE}
     private Button newQuestion;
     private QuizSet set;
-    private ArrayList<QuizQuestion> arrayOfQuestions = new ArrayList<QuizQuestion>();
+    private ArrayList<QuizQuestion> arrayOfQuestions = DataHolder.getInstance().arrayOfQuestions;
+    private EditText editText;
+    private Spinner spinner;
+    ListView listView;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,9 +48,6 @@ public class CreateOrEditSetActivity extends AppCompatActivity {
             question.wrongAnswers.add(answers[2]);
             question.wrongAnswers.add(answers[3]);
 
-            Log.e("Noel", question.getQuestion());
-            arrayOfQuestions.add(question);
-
             //add the object to the questionsList
             arrayOfQuestions.add(question);
         } catch (NullPointerException ex) {
@@ -56,7 +56,7 @@ public class CreateOrEditSetActivity extends AppCompatActivity {
 
         //count chars entered for name of set and change name
         TextView textView = findViewById(R.id.numberCharsOfSetName);
-        EditText editText = findViewById(R.id.nameCreateNew);
+        editText = findViewById(R.id.nameCreateNew);
         TextView tv = findViewById(R.id.createNew);
 
         //create a set
@@ -67,7 +67,7 @@ public class CreateOrEditSetActivity extends AppCompatActivity {
         // Create the adapter to convert the array to views
         QuestionAdapter adapterList = new QuestionAdapter(this, arrayOfQuestions);
         // Attach the adapter to a ListView
-        ListView listView = (ListView) findViewById(R.id.listOfCreateQuestions);
+        listView = (ListView) findViewById(R.id.listOfCreateQuestions);
         listView.setAdapter(adapterList);
 
 
@@ -98,12 +98,23 @@ public class CreateOrEditSetActivity extends AppCompatActivity {
             }
         });
 
+        //button to go to activity_create_set
+        Button buttonNewSet = (Button) findViewById(R.id.buttonAddNewSet);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createNewSet();
+            }
+        });
+
         //choose category from the list
-        Spinner spinner = (Spinner) findViewById(R.id.category_spinner);
+        spinner = (Spinner) findViewById(R.id.category_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.categories, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         //spinner.setOnItemClickListener(this);
+
+
 
 
     }
@@ -115,6 +126,36 @@ public class CreateOrEditSetActivity extends AppCompatActivity {
 
     //todo
     public void createNewSet() {
+        QuizSet quizSet = QuizSet.createNewSet(editText.getText().toString(), spinner.getSelectedItem().toString());
+
+        for (int i = 0; i < listView.getChildCount(); i++) {
+            View view = listView.getChildAt(i);
+
+            EditText etQuestion = (EditText) view.findViewById(R.id.editTitleQuestion);
+            EditText etRightAnswer = (EditText) view.findViewById(R.id.editCorrectAnswer);
+            EditText etWrongAnswer1 = (EditText) view.findViewById(R.id.editWrongAnswerOne);
+            EditText etWrongAnswer2 = (EditText) view.findViewById(R.id.editWrongAnswerTwo);
+            EditText etWrongAnswer3 = (EditText) view.findViewById(R.id.editWrongAnswerThree);
+
+            //create object QuizQuestion
+            QuizQuestion frage = new QuizQuestion(UUID.randomUUID().toString(), etQuestion.toString(), etRightAnswer.toString());
+            frage.wrongAnswers.add(etWrongAnswer1.toString());
+            frage.wrongAnswers.add(etWrongAnswer2.toString());
+            frage.wrongAnswers.add(etWrongAnswer3.toString());
+
+            //add question to set
+            quizSet.questions.add(frage);
+        }
+
+        //todo save the set
+
+
+        //delete arrayList
+        DataHolder.getInstance().arrayOfQuestions.clear();
+
+        //go to ShowAllSetsActivity
+        Intent intent = new Intent(this, ShowAllSetsActivity.class);
+        startActivity(intent);
 
     }
 
