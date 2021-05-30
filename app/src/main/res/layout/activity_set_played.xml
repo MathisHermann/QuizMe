@@ -1,58 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/tvCongratulations"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:textSize="24sp"
         android:layout_gravity="center"
+        android:layout_marginTop="64dp"
+        android:text="Congratulations, you played the set.\n Your score is:"
         android:textAlignment="center"
-        android:text="Congratulations, you played the set.\n Your score is:"/>
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/tvAmountCorrectAnsersTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="32dp"
+        android:text="Number of correct Answers: "
+        android:textAlignment="center"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/tvAmountCorrectAnsers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:layout_marginTop="32dp"
         android:layout_gravity="center"
         android:textAlignment="center"
-        android:text="Number of correct Answers: "/>
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvAmountWrongAnsersTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:text="Number of Wrong Answers:"
+        android:textAlignment="center"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/tvAmountWrongAnsers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:layout_marginTop="16dp"
         android:layout_gravity="center"
         android:textAlignment="center"
-        android:text="Number of Wrong Answers:"/>
+        android:textSize="18sp" />
 
+
+    <TextView
+        android:id="@+id/tvAmountAllAnsersTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:text="Number of all Answers:"
+        android:textAlignment="center"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/tvAmountAllAnsers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:layout_marginTop="16dp"
         android:layout_gravity="center"
         android:textAlignment="center"
-        android:text="Number of all Answers:"/>
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvSetPlayedScoreTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:text="Score of this Round:"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvSetPlayedScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvSetHighScoreTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:text="Highscore of this Set:"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvSetHighScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/btnBackToAllSetsFromSetPlayed"
+        style="?android:attr/buttonBarButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
         android:layout_gravity="center"
-        style="?android:attr/buttonBarButtonStyle"
+        android:layout_marginTop="64dp"
         android:text="Back" />
 
 </LinearLayout>
