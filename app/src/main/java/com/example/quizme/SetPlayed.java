@@ -59,7 +59,7 @@ public class SetPlayed extends AppCompatActivity {
         if (score == 0) {
             tvSetPlayedScore.setText("0%");
         } else {
-            tvSetPlayedScore.setText("" + (amountAnswers / score * 100) + "%");
+            tvSetPlayedScore.setText("" + ( score / amountAnswers * 100) + "%");
         }
         tvSetHighScore.setText("" + highScore);
 
