@@ -16,7 +16,7 @@
         android:textSize="24sp" />
 
     <TextView
-        android:id="@+id/tvAmountCorrectAnsersTitle"
+        android:id="@+id/tvAmountCorrectAnswersTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -26,7 +26,7 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/tvAmountCorrectAnsers"
+        android:id="@+id/tvAmountCorrectAnswers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -34,7 +34,7 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/tvAmountWrongAnsersTitle"
+        android:id="@+id/tvAmountWrongAnswersTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -44,7 +44,7 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/tvAmountWrongAnsers"
+        android:id="@+id/tvAmountWrongAnswers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -53,7 +53,7 @@
 
 
     <TextView
-        android:id="@+id/tvAmountAllAnsersTitle"
+        android:id="@+id/tvAmountAllAnswersTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -63,7 +63,7 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/tvAmountAllAnsers"
+        android:id="@+id/tvAmountAllAnswers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
