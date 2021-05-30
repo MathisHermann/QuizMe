@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -62,24 +63,31 @@ public class playSetActivity extends AppCompatActivity {
     private ListView lvDisplayAllSets;
     private ListView lvPlayAnswers;
     private final List<String> allOptions = new ArrayList<String>();
-    FlatfileDatabase fdb = new FlatfileDatabase(new DBHandler(getApplicationContext()));
+    FlatfileDatabase fdb;
     String setID, rightAnser;
     private int setPotion = 0;
     private int round = 0;
     private String question;
     private int correctPosion;
     private int score;
+    private int amountAnswers;
     private Set<QuizQuestion> questions;
     private TextView tvPlayQuestion;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_set);
+        tvPlayQuestion = findViewById(R.id.tvPlayQuestion);
 
+        lvDisplayAllSets = findViewById(R.id.lvDisplayAllSets);
+        lvPlayAnswers = findViewById(R.id.lvPlayAnswers);
 
+        //TODO: setPotion gemäss Listenauswahl einstellen
+        fdb = new FlatfileDatabase(new DBHandler(getApplicationContext()));
+
+        questions = fdb.getAllSets().stream().collect(Collectors.toList()).get(setPotion).questions;
         roundPlay();
 
         lvPlayAnswers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -90,8 +98,6 @@ public class playSetActivity extends AppCompatActivity {
 
 
         });
-        questions = fdb.getAllSets().stream().collect(Collectors.toList()).get(setPotion).questions;
-
     }
 
     private void roundPlay() {
@@ -139,10 +145,13 @@ public class playSetActivity extends AppCompatActivity {
     }
 
     private void openScoreAcrivity(int score) {
+        Log.e("playSet", "openScore");
 
-        /*todo
-        Intent intent = new Intent(this, openScoreAcrivity.class);
+/*
+        Intent intent = new Intent(this, SetPlayed.class);
         intent.putExtra("score", score);
+        //todo amountAnswers fill
+        intent.putExtra("amountAnswers", amountAnswers);
         startActivity(intent);*/
 
     }
