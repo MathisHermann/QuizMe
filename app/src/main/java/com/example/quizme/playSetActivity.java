@@ -69,7 +69,7 @@ public class playSetActivity extends AppCompatActivity {
     private int round = 0;
     private String question;
     private int correctPosion;
-    private int score;
+    private int score = 0;
     private int amountAnswers;
     private Set<QuizQuestion> questions;
     private TextView tvPlayQuestion;
@@ -137,22 +137,23 @@ public class playSetActivity extends AppCompatActivity {
         }else {
             lvPlayAnswers.setBackgroundColor(Color.RED);
         }
-        if(round == questions.size()){
+        if(round + 1 == questions.size()){
             openScoreAcrivity(score);
+        }else {
+            round++;
+            roundPlay();
         }
-        round++;
-        roundPlay();
     }
 
     private void openScoreAcrivity(int score) {
         Log.e("playSet", "openScore");
 
-/*
+
         Intent intent = new Intent(this, SetPlayed.class);
         intent.putExtra("score", score);
-        //todo amountAnswers fill
-        intent.putExtra("amountAnswers", amountAnswers);
-        startActivity(intent);*/
+
+        intent.putExtra("amountAnswers", round +1);
+        startActivity(intent);
 
     }
 
