@@ -1,6 +1,7 @@
 package com.example.quizme.database;
 
 import android.database.Cursor;
+import android.util.Log;
 
 import com.example.quizme.entity.QuizQuestion;
 import com.example.quizme.entity.QuizSet;
@@ -36,28 +37,33 @@ public class FlatfileDatabase {
             } while (cursor.moveToNext());
         }
         for (QuizSet set : sets) {
+            Log.e("DBank", "Set " + set.getName());
             //BTW: Das was in de Doku stoht über SQLite isch in jedem Projekt mit Sicherheitsrequirements
             //brandgeförlich. Machet euri Applikatione SQL Injection sicher im Name vo Terry A. Davis und Dennis Ritchie
             //süchscht gits Handlige gäge die Genfer Konvention :))
             Cursor cursor2 = dbHandler.getReadableDatabase().
                     rawQuery(String.format("SELECT * FROM quizQuestion WHERE setUUID = '%s';",
                             set.getUUID()), null);
+            Log.e("DBank", "QEntry begin");
             if (cursor2.moveToFirst()) {
                 do {
+                    Log.e("DBank", "QEntry");
                     QuizQuestion question = new QuizQuestion(
-                            cursor.getString(cursor.getColumnIndex("questionUUID")),
-                            cursor.getString(cursor.getColumnIndex("questionText")),
-                            cursor.getString(cursor.getColumnIndex("correctAnswer")));
+                            cursor2.getString(cursor2.getColumnIndex("questionUUID")),
+                            cursor2.getString(cursor2.getColumnIndex("questionText")),
+                            cursor2.getString(cursor2.getColumnIndex("correctAnswer")));
                     Cursor cursor3 = dbHandler.getReadableDatabase().
                             rawQuery(String.format("SELECT * FROM quizWrongAnswers WHERE questionUUID = '%s';",
                                     question.uuid), null);
                     if (cursor3.moveToFirst()) {
                         do {
-                            question.wrongAnswers.add(cursor
-                                    .getString(cursor.getColumnIndex("answer")));
+                            question.wrongAnswers.add(cursor3
+                                    .getString(cursor3.getColumnIndex("answer")));
                         } while (cursor3.moveToNext());
                     }
                     cursor3.close();
+                    Log.e("DBank", "Set " + set.getName());
+                    Log.e("DBank", "Qu "+ set.questions.size());
                     set.questions.add(question);
                 } while (cursor2.moveToNext());
             }

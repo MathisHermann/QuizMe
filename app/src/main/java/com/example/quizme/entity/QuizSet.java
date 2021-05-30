@@ -28,7 +28,7 @@ public class QuizSet {
      * @return Quizsatz
      */
     public static QuizSet constructSet(String setUUID, String name, String category) {
-        return new QuizSet(UUID.randomUUID().toString(), name, category);
+        return new QuizSet(setUUID, name, category);
     }
 
     private QuizSet(String uuid, String name, String category) {
