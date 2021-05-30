@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvCongratulations"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:textSize="24sp"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:text="Congratulations, you played the set.\n Your score is:"/>
+
+    <TextView
+        android:id="@+id/tvAmountCorrectAnsers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginTop="32dp"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:text="Number of correct Answers: "/>
+
+    <TextView
+        android:id="@+id/tvAmountWrongAnsers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:text="Number of Wrong Answers:"/>
+
+
+    <TextView
+        android:id="@+id/tvAmountAllAnsers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:text="Number of all Answers:"/>
+
+    <Button
+        android:id="@+id/btnBackToAllSetsFromSetPlayed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:layout_gravity="center"
+        style="?android:attr/buttonBarButtonStyle"
+        android:text="Back" />
+
+</LinearLayout>
