@@ -1,6 +1,7 @@
 package com.example.quizme.database;
 
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.quizme.entity.QuizQuestion;
@@ -78,22 +79,61 @@ public class FlatfileDatabase {
      * @param sets Sammlung von Quizsätzen zum Überschreiben
      */
     public void overrideSetsToDB(Collection<QuizSet> sets) {
-        dbHandler.getWritableDatabase().execSQL("DELETE FROM quizSet;");
+        SQLiteDatabase db = dbHandler.getWritableDatabase();
+        db.execSQL("DELETE FROM quizSet;");
+        db.execSQL("DELETE FROM quizQuestion;");
+        db.execSQL("DELETE FROM quizWrongAnswers;");
         for (QuizSet set : sets) {
-            dbHandler.getWritableDatabase().execSQL(String
+            db.execSQL(String
                     .format("INSERT INTO quizSet (setUUID, name, category) " +
                             "VALUES ('%s', '%s', '%s')", set.getUUID(), set.getName(), set.getCategory()));
             for (QuizQuestion question : set.questions) {
                 for (String wrongAnswer : question.wrongAnswers) {
-                    dbHandler.getWritableDatabase().execSQL(String
+                    db.execSQL(String
                             .format("INSERT INTO quizWrongAnswers (answer, questionUUID) " +
                                     "VALUES ('%s', '%s')", wrongAnswer, question.uuid));
                 }
-                dbHandler.getWritableDatabase().execSQL(
+                db.execSQL(
                         String.format("INSERT INTO quizQuestion (questionUUID, questionText, " +
                         "correctAnswer, setUUID) VALUES ('%s', '%s', '%s', '%s')", question.uuid,
                                 question.getQuestion(), question.getCorrectAnswer(), set.getUUID()));
             }
         }
+    }
+
+    public void writeHighscore(String uuid, String name, int score) {
+        SQLiteDatabase db = dbHandler.getWritableDatabase();
+        db.execSQL(String.format("INSERT INTO highscore (setUUID, name, score) " +
+                "VALUES ('%s', '%s', %d);", uuid, name, score));
+    }
+
+    public int getHighscoreScore(String uuid) {
+        SQLiteDatabase db = dbHandler.getReadableDatabase();
+        int score = 0;
+        Cursor cursor = dbHandler.getReadableDatabase().
+                rawQuery(String.format("SELECT score, strftime('%%s', timestamp) as time FROM highscore WHERE setUUID = '%s' " +
+                        "ORDER BY score DESC, time DESC LIMIT 1;", uuid), null);
+        if (cursor.moveToFirst()) {
+            do {
+                score = cursor.getInt(cursor.getColumnIndex("score"));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return score;
+    }
+
+    public String getHighscoreName(String uuid) {
+        SQLiteDatabase db = dbHandler.getReadableDatabase();
+        String name = "User";
+        Cursor cursor = dbHandler.getReadableDatabase().
+                rawQuery(String.format("SELECT name, strftime('%%s', timestamp) as time FROM highscore WHERE setUUID = '%s' " +
+                        "ORDER BY score DESC, time DESC LIMIT 1;", uuid), null);
+        if (cursor.moveToFirst()) {
+            do {
+                name = cursor.getString(cursor.getColumnIndex("name"));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return name;
     }
 }

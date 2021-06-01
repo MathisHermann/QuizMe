@@ -19,7 +19,7 @@ import java.util.List;
 
 import com.example.quizme.database.FlatfileDatabase;
 import com.example.quizme.database.DBHandler;
-
+import com.example.quizme.entity.QuizSet;
 
 
 public class ShowAllSetsActivity extends AppCompatActivity {
@@ -34,6 +34,7 @@ public class ShowAllSetsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_all_sets);
+        DataHolder.getInstance().arrayOfQuestions.clear();
         fdb = new FlatfileDatabase(new DBHandler(getApplicationContext()));
         Intent intent = getIntent();
         String playerName = intent.getStringExtra("PLAYER_NAME");
@@ -67,10 +68,13 @@ public class ShowAllSetsActivity extends AppCompatActivity {
         lvDisplayAllSets.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                openActivityPlayQuiz(position);
+                for (QuizSet set : fdb.getAllSets()) {
+                    if(set.getName().equals(allSets.get(position))) {
+                        openActivityPlayQuiz(set.getUUID());
+                        break;
+                    }
+                }
             }
-
-
         });
 
         //button to go to activity_create_set
@@ -86,13 +90,15 @@ public class ShowAllSetsActivity extends AppCompatActivity {
     public void openCreateOrEditSetActivity() {
         Intent intent2 = new Intent(this, CreateOrEditSetActivity.class);
         startActivity(intent2);
+        finish();
     }
 
-    private void openActivityPlayQuiz(int position) {
+    private void openActivityPlayQuiz(String uuid) {
         Intent intent = new Intent(this, playSetActivity.class);
-        intent.putExtra("position", position);
+        intent.putExtra("positionUUID", uuid);
         //based on item add info to intent
         startActivity(intent);
+        finish();
     }
 
 

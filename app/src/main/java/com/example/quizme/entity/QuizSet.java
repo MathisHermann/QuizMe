@@ -1,6 +1,8 @@
 package com.example.quizme.entity;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -8,7 +10,7 @@ public class QuizSet {
     private final String setUUID;
     private String name;
     private String category;
-    public final Set<QuizQuestion> questions = new HashSet<>();
+    public final List<QuizQuestion> questions = new ArrayList<>();
 
     /**
      * Erstellt einen neuen Quizsatz

@@ -8,6 +8,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.quizme.database.DBHandler;
+import com.example.quizme.database.FlatfileDatabase;
+
 public class SetPlayed extends AppCompatActivity {
 
 
@@ -18,13 +21,13 @@ public class SetPlayed extends AppCompatActivity {
     private TextView tvSetPlayedScore;
     private TextView tvSetHighScore;
     private Button btnBackToAllSetsFromSetPlayed;
+    private FlatfileDatabase fdb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_played);
-
-
+        fdb = new FlatfileDatabase(new DBHandler(getApplicationContext()));
         tvAmountCorrectAnswers = findViewById(R.id.tvAmountCorrectAnswers);
         tvAmountWrongAnswers = findViewById(R.id.tvAmountWrongAnswers);
         tvAmountAllAnswers = findViewById(R.id.tvAmountAllAnswers);
@@ -35,6 +38,8 @@ public class SetPlayed extends AppCompatActivity {
         loadContent();
         btnBackToAllSetsFromSetPlayed.setOnClickListener(backToOverview -> {
             Intent intent = new Intent(this, ShowAllSetsActivity.class);
+            startActivity(intent);
+            finish();
         });
 
 
@@ -48,9 +53,11 @@ public class SetPlayed extends AppCompatActivity {
         //Bundle extras = getIntent().getExtras();
         int score = getIntent().getIntExtra("score", 0);
         int amountAnswers = getIntent().getIntExtra("amountAnswers", 0);
+        String setUUID = getIntent().getStringExtra("setUUID");
         //int score = extras.getInt("score");
         //int amountAnswers = extras.getInt("amountAnswers");
-        String highScore = "n.A.";
+        String highScore = String.format("%d (%s)", fdb.getHighscoreScore(setUUID),
+                fdb.getHighscoreName(setUUID));
 
         //tvAmountCorrectAnswers.setText("1");
         tvAmountCorrectAnswers.setText("" + score);
@@ -61,7 +68,7 @@ public class SetPlayed extends AppCompatActivity {
         } else {
             tvSetPlayedScore.setText("" + ( score / amountAnswers * 100) + "%");
         }
-        tvSetHighScore.setText("" + highScore);
+        tvSetHighScore.setText(highScore);
 
     }
 }

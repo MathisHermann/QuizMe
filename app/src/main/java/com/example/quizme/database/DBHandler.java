@@ -4,8 +4,14 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.quizme.entity.QuizQuestion;
+import com.example.quizme.entity.QuizSet;
+
+import java.util.ArrayList;
+import java.util.UUID;
+
 public class DBHandler extends SQLiteOpenHelper {
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 5;
     private static final String DB_NAME = "quiz.db";
 
     /**
@@ -18,12 +24,12 @@ public class DBHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE quizSet (setUUID TEXT unique, name TEXT, category TEXT);");
+        db.execSQL("CREATE TABLE quizSet (setUUID TEXT unique, name TEXT unique, category TEXT);");
         db.execSQL("CREATE TABLE quizQuestion (questionUUID TEXT unique, questionText TEXT, " +
-                "correctAnswer TEXT, setUUID TEXT, FOREIGN KEY(setUUID) REFERENCES quizSet(setUUID) ON DELETE CASCADE);");
-        db.execSQL("CREATE TABLE quizWrongAnswers (answer TEXT, questionUUID TEXT, " +
-                "FOREIGN KEY(questionUUID) REFERENCES quizQuestion(questionUUID) " +
-                "ON DELETE CASCADE);");
+                "correctAnswer TEXT, setUUID TEXT);");
+        db.execSQL("CREATE TABLE quizWrongAnswers (answer TEXT, questionUUID TEXT);");
+        db.execSQL("CREATE TABLE highscore (setUUID TEXT, name TEXT, score INTEGER, " +
+                "timestamp DATETIME DEFAULT CURRENT_TIMESTAMP);");
     }
 
     @Override
