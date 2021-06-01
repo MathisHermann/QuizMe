@@ -120,9 +120,9 @@ public class CreateOrEditSetActivity extends AppCompatActivity {
 
         //
         Button bt_back= findViewById(R.id.btnBackToAllSetsFromOrEditCreateSet);
-        buttonNewSet.setOnClickListener(new View.OnClickListener() {
+        bt_back.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { backToShowAllSets(); }
+            public void onClick(View v) { Log.e("Back", "back"); backToShowAllSets(); }
         });
 
     }
@@ -134,6 +134,7 @@ public class CreateOrEditSetActivity extends AppCompatActivity {
 
     private void backToShowAllSets() {
         Intent intent = new Intent(this, ShowAllSetsActivity.class);
+
         startActivity(intent);
     }
 
