@@ -118,6 +118,12 @@ public class CreateOrEditSetActivity extends AppCompatActivity {
         spinner.setAdapter(adapter);
         //spinner.setOnItemClickListener(this);
 
+        //
+        Button bt_back= findViewById(R.id.btnBackToAllSetsFromOrEditCreateSet);
+        buttonNewSet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { backToShowAllSets(); }
+        });
 
     }
 
@@ -126,7 +132,11 @@ public class CreateOrEditSetActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    //todo
+    private void backToShowAllSets() {
+        Intent intent = new Intent(this, ShowAllSetsActivity.class);
+        startActivity(intent);
+    }
+
     public void createNewSet() {
         QuizSet quizSet = QuizSet.createNewSet(editText.getText().toString(), spinner.getSelectedItem().toString());
 
