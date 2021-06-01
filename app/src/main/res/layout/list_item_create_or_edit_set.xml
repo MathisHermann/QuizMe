@@ -22,10 +22,12 @@
         android:textColor="@color/lightgrey"
         android:text="Question 1:" />
 
+
     <EditText
         android:id="@+id/editTitleQuestion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:enabled="false"
         android:maxLines="1"
         android:maxLength="50"/>
 
@@ -47,6 +49,8 @@
             android:id="@+id/editCorrectAnswer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
+            android:inputType="none" />
             android:maxLines="1"
             android:maxLength="50"/>
 
@@ -68,6 +72,8 @@
             android:id="@+id/editWrongAnswerOne"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
+            android:inputType="none" />
             android:maxLines="1"
             android:maxLength="50"/>
     </LinearLayout>
@@ -89,6 +95,8 @@
             android:id="@+id/editWrongAnswerTwo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
+            android:inputType="none" />
             android:maxLines="1"
             android:maxLength="50"/>
     </LinearLayout>
@@ -109,9 +117,10 @@
             android:id="@+id/editWrongAnswerThree"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
+            android:inputType="none" />
             android:maxLines="1"
             android:maxLength="50"/>
-
     </LinearLayout>
 
 

@@ -22,18 +22,18 @@ public class NewQuestion extends AppCompatActivity {
 
         //button save question
         ImageButton  imageButton = (ImageButton) findViewById(R.id.imageButton);
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveQuestion();
-            }
-        });
+        imageButton.setOnClickListener(v -> saveQuestion());
         tv_em=findViewById(R.id.tv_error_message);
+        Button backBtn = findViewById(R.id.btnBackToAllSetsFromNewQuestion);
+        backBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(this, CreateOrEditSetActivity.class);
+            startActivity(intent);
+            finish();
+        });
     }
 
     private void saveQuestion() {
         Intent intent = new Intent(this, CreateOrEditSetActivity.class);
-
         EditText question = findViewById(R.id.et_question);
         EditText rightAnswer = findViewById(R.id.et_RightAnswer);
         EditText wrongAnswer1 = findViewById(R.id.et_wrongAnswer1);

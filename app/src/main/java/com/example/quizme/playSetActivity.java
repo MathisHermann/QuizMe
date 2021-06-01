@@ -1,10 +1,12 @@
 package com.example.quizme;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -64,7 +67,7 @@ public class playSetActivity extends AppCompatActivity {
     Button buttonStart;
     private ListView lvDisplayAllSets;
     private ListView lvPlayAnswers;
-    private final List<String> allOptions = new ArrayList<String>();
+    private final List<String> allOptions = new ArrayList<>();
     FlatfileDatabase fdb;
     String setID, rightAnser;
     private int setPotion = 0;
@@ -73,8 +76,11 @@ public class playSetActivity extends AppCompatActivity {
     private int correctPosion;
     private int score = 0;
     private int amountAnswers;
-    private Set<QuizQuestion> questions;
+    private ProgressBar bar;
+    private TextView tvCurrentQu;
+    private List<QuizQuestion> questions;
     private TextView tvPlayQuestion;
+    private final Handler handler = new Handler();
 
 
     @Override
@@ -82,40 +88,39 @@ public class playSetActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_set);
         tvPlayQuestion = findViewById(R.id.tvPlayQuestion);
-
+        bar = findViewById(R.id.progressBar);
+        tvCurrentQu = findViewById(R.id.tvNumberCurrentQuestion);
         lvDisplayAllSets = findViewById(R.id.lvDisplayAllSets);
         lvPlayAnswers = findViewById(R.id.lvPlayAnswers);
 
-        //TODO: setPotion gemäss Listenauswahl einstellen
         fdb = new FlatfileDatabase(new DBHandler(getApplicationContext()));
-
-        questions = fdb.getAllSets().stream().collect(Collectors.toList()).get(setPotion).questions;
+        fdb.getAllSets().forEach(set -> {
+            if(set.getUUID().equals(getIntent().getStringExtra("positionUUID"))) {
+                questions = new ArrayList<>(set.questions);
+            }
+        });
         roundPlay();
 
-        lvPlayAnswers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, android.view.View view, int position, long id) {
-                select(position);
-            }
-
-
-        });
+        lvPlayAnswers.setOnItemClickListener((parent, view, position, id) -> select(position));
     }
 
+    @SuppressLint("SetTextI18n")
     private void roundPlay() {
-        if (questions.stream().collect(Collectors.toList()).size() == 0) {
+        if (questions.size() == 0) {
             error("error: no question in this set");
-            Log.e("PYsizeIF", "" + questions.stream().collect(Collectors.toList()).size());
+            Log.e("PYsizeIF", "" + questions.size());
             finish();
-            Log.e("PYsizeIFfinish", "" + questions.stream().collect(Collectors.toList()).size());
+            Log.e("PYsizeIFfinish", "" + questions.size());
         } else {
-            Log.e("PYsize", "" + questions.stream().collect(Collectors.toList()).size());
-
-            QuizQuestion quizQuestion = questions.stream().collect(Collectors.toList()).get(round);
+            Log.e("PYsize", "" + questions.size());
+            bar.setProgress((int) (round / (double) questions.size() * 100), true);
+            tvCurrentQu.setText(round + " / " + questions.size());
+            QuizQuestion quizQuestion = questions.get(round);
 
 
             question = quizQuestion.getQuestion();
             tvPlayQuestion.setText(question);
+            allOptions.clear();
             allOptions.addAll(quizQuestion.wrongAnswers);
             allOptions.add(randomCorrectPosion(), quizQuestion.getCorrectAnswer());
 
@@ -141,7 +146,7 @@ public class playSetActivity extends AppCompatActivity {
     }
 
     private int randomCorrectPosion() {
-        correctPosion = new Random().nextInt(5);
+        correctPosion = new Random().nextInt(4);
         return correctPosion;
     }
 
@@ -154,6 +159,7 @@ public class playSetActivity extends AppCompatActivity {
         } else {
             lvPlayAnswers.setBackgroundColor(Color.RED);
         }
+        handler.postDelayed(() -> lvPlayAnswers.setBackgroundColor(Color.GRAY), 150);
         if (round + 1 == questions.size()) {
             openScoreAcrivity(score);
         } else {
@@ -164,16 +170,14 @@ public class playSetActivity extends AppCompatActivity {
 
     private void openScoreAcrivity(int score) {
         Log.e("playSet", "openScore");
-
-
+        fdb.writeHighscore(getIntent().getStringExtra("positionUUID"),
+                DataHolder.getInstance().playerName, score);
         Intent intent = new Intent(this, SetPlayed.class);
         intent.putExtra("score", score);
-
+        intent.putExtra("setUUID", getIntent().getStringExtra("positionUUID"));
         intent.putExtra("amountAnswers", round + 1);
         startActivity(intent);
+        finish();
 
     }
-
-    ;
-
 }

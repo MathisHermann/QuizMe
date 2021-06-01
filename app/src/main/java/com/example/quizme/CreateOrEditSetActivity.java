@@ -1,5 +1,6 @@
 package com.example.quizme;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,9 +31,8 @@ public class CreateOrEditSetActivity extends AppCompatActivity {
     //enum Categories {SPORTS, GEOGRAPHY,MUSIC, FILMS, TV, HISTORY, LITERATURE, LANGUAGE, SCIENCE, GAMING, ENTERTAINMENT, RELIGION, FUN, PEOPLE}
     private Button newQuestion;
     private QuizSet set;
-    private ArrayList<QuizQuestion> arrayOfQuestions = DataHolder.getInstance().arrayOfQuestions;
-    private EditText editText;
-    private Spinner spinner;
+    private EditText setName;
+    private Spinner category;
     private FlatfileDatabase fdb;
     ListView listView;
 
@@ -55,14 +56,14 @@ public class CreateOrEditSetActivity extends AppCompatActivity {
             question.wrongAnswers.add(answers[3]);
 
             //add the object to the questionsList
-            arrayOfQuestions.add(question);
+            DataHolder.getInstance().arrayOfQuestions.add(question);
         } catch (NullPointerException ex) {
             Log.e("Noel", "Probleme mit Extra, eeeegal!");
         }
 
         //count chars entered for name of set and change name
         TextView textView = findViewById(R.id.numberCharsOfSetName);
-        editText = findViewById(R.id.nameCreateNew);
+        setName = findViewById(R.id.nameCreateNew);
         TextView tv = findViewById(R.id.createNew);
 
         //create a set
@@ -71,23 +72,23 @@ public class CreateOrEditSetActivity extends AppCompatActivity {
         //ListView all questions by https://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView
 
         // Create the adapter to convert the array to views
-        QuestionAdapter adapterList = new QuestionAdapter(this, arrayOfQuestions);
+        QuestionAdapter adapterList = new QuestionAdapter(this, DataHolder.getInstance().arrayOfQuestions);
         // Attach the adapter to a ListView
         listView = (ListView) findViewById(R.id.listOfCreateQuestions);
         listView.setAdapter(adapterList);
 
 
-        editText.addTextChangedListener(new TextWatcher() {
+        setName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                int length = editText.length();
+                int length = setName.length();
                 String convert = String.valueOf(length) + "/30";
                 textView.setText(convert);
-                tv.setText(editText.getText());
+                tv.setText(setName.getText());
             }
 
             @Override
@@ -112,17 +113,17 @@ public class CreateOrEditSetActivity extends AppCompatActivity {
         });
 
         //choose category from the list
-        spinner = (Spinner) findViewById(R.id.category_spinner);
+        category = (Spinner) findViewById(R.id.category_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.categories, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        category.setAdapter(adapter);
         //spinner.setOnItemClickListener(this);
 
         //
         Button bt_back= findViewById(R.id.btnBackToAllSetsFromOrEditCreateSet);
-        buttonNewSet.setOnClickListener(new View.OnClickListener() {
+        bt_back.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { backToShowAllSets(); }
+            public void onClick(View v) { Log.e("Back", "back"); backToShowAllSets(); }
         });
 
     }
@@ -130,44 +131,33 @@ public class CreateOrEditSetActivity extends AppCompatActivity {
     private void openNewQuestionActivity() {
         Intent intent = new Intent(this, NewQuestion.class);
         startActivity(intent);
+        finish();
     }
 
     private void backToShowAllSets() {
         Intent intent = new Intent(this, ShowAllSetsActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void createNewSet() {
-        QuizSet quizSet = QuizSet.createNewSet(editText.getText().toString(), spinner.getSelectedItem().toString());
-
-        for (int i = 0; i < listView.getChildCount(); i++) {
-            View view = listView.getChildAt(i);
-
-            EditText etQuestion = (EditText) view.findViewById(R.id.editTitleQuestion);
-            EditText etRightAnswer = (EditText) view.findViewById(R.id.editCorrectAnswer);
-            EditText etWrongAnswer1 = (EditText) view.findViewById(R.id.editWrongAnswerOne);
-            EditText etWrongAnswer2 = (EditText) view.findViewById(R.id.editWrongAnswerTwo);
-            EditText etWrongAnswer3 = (EditText) view.findViewById(R.id.editWrongAnswerThree);
-
-            //create object QuizQuestion
-            QuizQuestion frage = new QuizQuestion(UUID.randomUUID().toString(),
-                    etQuestion.getText().toString(), etRightAnswer.getText().toString());
-            frage.wrongAnswers.add(etWrongAnswer1.getText().toString());
-            frage.wrongAnswers.add(etWrongAnswer2.getText().toString());
-            frage.wrongAnswers.add(etWrongAnswer3.getText().toString());
-
-            //add question to set
-            quizSet.questions.add(frage);
+        if(setName.getText().toString().equals("")) {
+            error("No title set.");
+            return;
         }
-/*
-        //test
-        String[] arraySet = quizSet.questions.toArray(new String[quizSet.questions.size()]);
-        for (String name : arraySet) {
-            Log.e("Stoll", name);
+        if(listView.getChildCount() == 0) {
+            error("Please add some questions.");
+            return;
         }
-*/
+        for (QuizSet set : fdb.getAllSets()) {
+            if(set.getName().equals(setName.getText().toString())) {
+                error("This set name is taken.");
+                return;
+            }
+        }
+        QuizSet quizSet = QuizSet.createNewSet(setName.getText().toString(), category.getSelectedItem().toString());
+        quizSet.questions.addAll(DataHolder.getInstance().arrayOfQuestions);
 
-        //todo save the set
         Set<QuizSet> allSetsInDB = fdb.getAllSets();
         allSetsInDB.add(quizSet);
         fdb.overrideSetsToDB(allSetsInDB);
@@ -178,8 +168,16 @@ public class CreateOrEditSetActivity extends AppCompatActivity {
         //go to ShowAllSetsActivity
         Intent intent = new Intent(this, ShowAllSetsActivity.class);
         startActivity(intent);
+        finish();
 
     }
 
+    private void error(String error) {
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
 
+        Toast toast = Toast.makeText(context, error, duration);
+        toast.show();
+
+    }
 }

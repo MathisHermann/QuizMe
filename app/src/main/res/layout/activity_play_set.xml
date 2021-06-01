@@ -22,9 +22,9 @@
             android:layout_marginStart="23dp"
             android:indeterminate="false"
             android:max="100"
-            android:minHeight="50dp"
             android:minWidth="200dp"
-            android:progress="45" />
+            android:minHeight="50dp"
+            android:progress="0" />
 
         <TextView
             android:id="@+id/tvNumberCurrentQuestion"
