@@ -24,11 +24,13 @@ public class SetPlayed extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_played);
 
-        TextView tvAmountCorrectAnswers = findViewById(R.id.tvAmountCorrectAnswers);
-        TextView tvAmountWrongAnswers = findViewById(R.id.tvAmountWrongAnswers);
-        TextView tvAmountAllAnswers = findViewById(R.id.tvAmountAllAnswers);
-        TextView tvSetPlayedScore = findViewById(R.id.tvSetPlayedScore);
-        TextView tvSetHighScore = findViewById(R.id.tvSetHighScore);
+
+        tvAmountCorrectAnswers = findViewById(R.id.tvAmountCorrectAnswers);
+        tvAmountWrongAnswers = findViewById(R.id.tvAmountWrongAnswers);
+        tvAmountAllAnswers = findViewById(R.id.tvAmountAllAnswers);
+        tvSetPlayedScore = findViewById(R.id.tvSetPlayedScore);
+        tvSetHighScore = findViewById(R.id.tvSetHighScore);
+        btnBackToAllSetsFromSetPlayed = findViewById(R.id.btnBackToAllSetsFromSetPlayed);
 
         loadContent();
         btnBackToAllSetsFromSetPlayed.setOnClickListener(backToOverview -> {
@@ -43,16 +45,23 @@ public class SetPlayed extends AppCompatActivity {
     // - Set new Highscore if new highscore
     @SuppressLint("SetTextI18n")
     private void loadContent() {
-        Bundle extras = getIntent().getExtras();
-        int score = extras.getInt("score");
-        int amountAnswers = extras.getInt("amountAnswers");
+        //Bundle extras = getIntent().getExtras();
+        int score = getIntent().getIntExtra("score", 0);
+        int amountAnswers = getIntent().getIntExtra("amountAnswers", 0);
+        //int score = extras.getInt("score");
+        //int amountAnswers = extras.getInt("amountAnswers");
         String highScore = "n.A.";
 
-        tvAmountCorrectAnswers.setText(score);
-        tvAmountWrongAnswers.setText(amountAnswers - score);
-        tvAmountAllAnswers.setText(amountAnswers);
-        tvSetPlayedScore.setText(amountAnswers / score * 100 + "%");
-        tvSetHighScore.setText(highScore);
+        //tvAmountCorrectAnswers.setText("1");
+        tvAmountCorrectAnswers.setText("" + score);
+        tvAmountWrongAnswers.setText("" + (amountAnswers - score));
+        tvAmountAllAnswers.setText("" + amountAnswers);
+        if (score == 0) {
+            tvSetPlayedScore.setText("0%");
+        } else {
+            tvSetPlayedScore.setText("" + ( score / amountAnswers * 100) + "%");
+        }
+        tvSetHighScore.setText("" + highScore);
 
     }
 }
