@@ -34,7 +34,9 @@
             android:layout_marginBottom="20dp"
             android:ems="10"
             android:hint="Why is the sky dark in the night?"
-            android:inputType="text" />
+            android:inputType="text"
+            android:maxLines="1"
+            android:maxLength="50"/>
 
         <TextView
             android:id="@+id/tv_RightAnswer"
@@ -52,7 +54,9 @@
             android:layout_marginBottom="20dp"
             android:ems="10"
             android:hint="This answer is correct."
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:maxLines="1"
+            android:maxLength="50"/>
 
         <TextView
             android:id="@+id/tv_wrongAnswer"
@@ -70,7 +74,9 @@
             android:layout_marginBottom="20dp"
             android:ems="10"
             android:hint="This answer is wrong."
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:maxLines="1"
+            android:maxLength="50"/>
 
         <EditText
             android:id="@+id/et_wrongAnswer2"
@@ -79,7 +85,9 @@
             android:layout_marginBottom="20dp"
             android:ems="10"
             android:hint="This is also wrong."
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:maxLines="1"
+            android:maxLength="50"/>
 
         <EditText
             android:id="@+id/et_wrongAnswer1"
@@ -88,7 +96,9 @@
             android:layout_marginBottom="20dp"
             android:ems="10"
             android:hint="This is the third in a row."
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:maxLines="1"
+            android:maxLength="50"/>
 
         <LinearLayout
             android:layout_width="match_parent"
