@@ -73,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
             if (editText.getText().toString().equals("")) {
                 error("Please type in a name.");
             } else {
-                intent.putExtra("PLAYER_NAME", editText.getText().toString());
                 DataHolder.getInstance().playerName = editText.getText().toString();
                 startActivity(intent);
                 finish();

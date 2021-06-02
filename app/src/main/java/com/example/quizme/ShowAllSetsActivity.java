@@ -28,7 +28,6 @@ public class ShowAllSetsActivity extends AppCompatActivity {
     private Button btExit;
     private ListView lvDisplayAllSets;
     private List<String> allSets = new ArrayList<String>();
-    private String playerName;
     FlatfileDatabase fdb;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +35,7 @@ public class ShowAllSetsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_show_all_sets);
         DataHolder.getInstance().arrayOfQuestions.clear();
         fdb = new FlatfileDatabase(new DBHandler(getApplicationContext()));
-        Intent intent = getIntent();
-        String playerName = intent.getStringExtra("PLAYER_NAME");
+        String playerName = DataHolder.getInstance().playerName;
 
 
         headerQuizMeSets = findViewById(R.id.tvHeaderQuizMeSets);
