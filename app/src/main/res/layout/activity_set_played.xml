@@ -71,24 +71,6 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/tvSetPlayedScoreTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:text="Score of this Round:"
-        android:textAlignment="center"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/tvSetPlayedScore"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:textSize="18sp" />
-
-    <TextView
         android:id="@+id/tvSetHighScoreTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

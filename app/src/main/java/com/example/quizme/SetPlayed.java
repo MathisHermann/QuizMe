@@ -3,6 +3,7 @@ package com.example.quizme;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -18,7 +19,6 @@ public class SetPlayed extends AppCompatActivity {
     private TextView tvAmountCorrectAnswers;
     private TextView tvAmountWrongAnswers;
     private TextView tvAmountAllAnswers;
-    private TextView tvSetPlayedScore;
     private TextView tvSetHighScore;
     private Button btnBackToAllSetsFromSetPlayed;
     private FlatfileDatabase fdb;
@@ -31,7 +31,6 @@ public class SetPlayed extends AppCompatActivity {
         tvAmountCorrectAnswers = findViewById(R.id.tvAmountCorrectAnswers);
         tvAmountWrongAnswers = findViewById(R.id.tvAmountWrongAnswers);
         tvAmountAllAnswers = findViewById(R.id.tvAmountAllAnswers);
-        tvSetPlayedScore = findViewById(R.id.tvSetPlayedScore);
         tvSetHighScore = findViewById(R.id.tvSetHighScore);
         btnBackToAllSetsFromSetPlayed = findViewById(R.id.btnBackToAllSetsFromSetPlayed);
 
@@ -58,16 +57,9 @@ public class SetPlayed extends AppCompatActivity {
         //int amountAnswers = extras.getInt("amountAnswers");
         String highScore = String.format("%d (%s)", fdb.getHighscoreScore(setUUID),
                 fdb.getHighscoreName(setUUID));
-
-        //tvAmountCorrectAnswers.setText("1");
         tvAmountCorrectAnswers.setText("" + score);
         tvAmountWrongAnswers.setText("" + (amountAnswers - score));
         tvAmountAllAnswers.setText("" + amountAnswers);
-        if (score == 0) {
-            tvSetPlayedScore.setText("0%");
-        } else {
-            tvSetPlayedScore.setText("" + ( score / amountAnswers * 100) + "%");
-        }
         tvSetHighScore.setText(highScore);
 
     }
