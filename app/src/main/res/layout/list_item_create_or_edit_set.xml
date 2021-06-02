@@ -22,12 +22,14 @@
         android:textColor="@color/lightgrey"
         android:text="Question 1:" />
 
-        <EditText
-            android:id="@+id/editTitleQuestion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:enabled="false"
-            android:inputType="none" />
+
+    <EditText
+        android:id="@+id/editTitleQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:maxLines="1"
+        android:maxLength="50"/>
 
     </LinearLayout>
 
@@ -49,6 +51,8 @@
             android:layout_height="wrap_content"
             android:enabled="false"
             android:inputType="none" />
+            android:maxLines="1"
+            android:maxLength="50"/>
 
     </LinearLayout>
 
@@ -70,6 +74,8 @@
             android:layout_height="wrap_content"
             android:enabled="false"
             android:inputType="none" />
+            android:maxLines="1"
+            android:maxLength="50"/>
     </LinearLayout>
 
 
@@ -91,6 +97,8 @@
             android:layout_height="wrap_content"
             android:enabled="false"
             android:inputType="none" />
+            android:maxLines="1"
+            android:maxLength="50"/>
     </LinearLayout>
 
     <LinearLayout
@@ -111,7 +119,8 @@
             android:layout_height="wrap_content"
             android:enabled="false"
             android:inputType="none" />
-
+            android:maxLines="1"
+            android:maxLength="50"/>
     </LinearLayout>
 
 
